@@ -81,6 +81,7 @@ def can_update_multiple_items_at_once
   end
   binding.pry
   Movie.where('release_date >= 2000').map.with_index(1) do |change_title, i|
+    binding.pry
     change_title.find(i).update(:title => "A Movie")
   end
 
