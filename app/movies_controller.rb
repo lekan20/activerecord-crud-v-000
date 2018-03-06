@@ -66,7 +66,6 @@ def can_be_found_updated_and_saved
   # binding.pry
   find_movie = Movie.find_by(title: "Awesome Flick")
   update_movie_name = find_movie.update(:title => "Even Awesomer Flick")
-  # save_new_movie_name = update_movie_name.save
 end
 
 def can_update_using_update_method
