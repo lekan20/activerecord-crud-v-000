@@ -82,7 +82,8 @@ def can_update_multiple_items_at_once
   binding.pry
   Movie.where('release_date >= 2000').map.with_index(1) do |change_title|
     # binding.pry
-    change_title.title = "A Movie"
+    new_name = change_title.title = "A Movie"
+    new_name.save
   end
 
 end
