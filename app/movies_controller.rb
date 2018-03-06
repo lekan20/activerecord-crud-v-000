@@ -80,8 +80,8 @@ def can_update_multiple_items_at_once
     Movie.create(title: "Movie_#{i}", release_date: 2000+i)
   end
   binding.pry
-  Movie.where('release_date >= 2000').map.with_index do |change_title, i|
-    change_title.find_by(title: "Movie_#{i}").update(:title => "A Movie")
+  Movie.where('release_date >= 2000').map.with_index(1) do |change_title|
+    change_title.find(i).update(:title => "A Movie")
   end
 
 end
