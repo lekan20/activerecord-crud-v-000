@@ -6,9 +6,9 @@
 # end                              # end
 
 def can_be_instantiated_and_then_saved
-  movie = __
+  movie = Movie.new
   movie.title = "This is a title."
-  __
+  movie.save
 end
 
 def can_be_created_with_a_hash_of_attributes
@@ -19,50 +19,54 @@ def can_be_created_with_a_hash_of_attributes
       lead: "Paul Newman",
       in_theaters: false
   }
-  movie = __
+  movie = Movie.find_by(attributes)
 end
 
-def can_be_created_in_a_block(args = {})
+def can_be_created_in_a_block(args = {title: "Home Alone", release_date: 1990})
   Movie.create do |m|
-    __
+    m.title = args[:title]
+    m.release_date = args[:release_date]
   end
 end
 
 def can_get_the_first_item_in_the_database
-  __
+  movie = Movie.find(1)
+  movie_name = movie.title
+  movie_name
 end
 
 def can_get_the_last_item_in_the_database
-  __
+  Movie.last.title
 end
 
 def can_get_size_of_the_database
-  __
+  Movie.all.size
 end
 
 def can_find_the_first_item_from_the_database_using_id
-  __
+  Movie.find(1).title
 end
 
 def can_find_by_multiple_attributes
   # title == "Title"
   # release_date == 2000
   # director == "Me"
-  __
+  Movie.find_by(title: "Title", release_date: 2000, director: "Me")
 end
 
 def can_find_using_where_clause_and_be_sorted
-  # For this test return all movies released after 2002 and ordered by 
+  # For this test return all movies released after 2002 and ordered by
   # release date descending
-  __
+  Movie.where('release_date > 2002').order('release_date desc')
 end
 
 def can_be_found_updated_and_saved
   # Updtate the title "Awesome Flick" to "Even Awesomer Flick"
   Movie.create(title: "Awesome Flick")
-  __
-  __
-  __
+  # binding.pry
+  find_movie = Movie.find_by(title: "Awesome Flick")
+  update_movie_name = find_movie.update(:title => "Even Awesomer Flick")
+  # save_new_movie_name = update_movie_name.save
 end
 
 def can_update_using_update_method
@@ -92,11 +96,3 @@ def can_destroy_all_items_at_once
   end
   __
 end
-
-
-
-
-
-
-
-
